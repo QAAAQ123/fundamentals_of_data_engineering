@@ -39,7 +39,7 @@ if __name__ == "__main__":
     print("4. SQL 파일 읽기 완료")
 
     local_file_name = "order_extract.csv"
-    s3_file = "raw/orders/orders.csv"
+    s3_file = "orders.csv"
 
     m_cursor = conn.cursor()
 
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     m_cursor.close()
     conn.close()
 
-    destination = Path("data") / s3_file
+    destination = Path("chapter4/data") / s3_file
     destination.parent.mkdir(parents=True, exist_ok=True)
 
     shutil.copy2(local_file_name, destination)
