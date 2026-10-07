@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: fundamentals-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: my_username
+      POSTGRES_PASSWORD: my_password
+      POSTGRES_DB: my_db
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
