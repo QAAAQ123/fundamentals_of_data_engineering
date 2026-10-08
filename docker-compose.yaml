@@ -2,7 +2,6 @@ services:
   postgres:
     image: postgres:17
     container_name: fundamentals-postgres
-    restart: unless-stopped
 
     environment:
       POSTGRES_USER: my_username
