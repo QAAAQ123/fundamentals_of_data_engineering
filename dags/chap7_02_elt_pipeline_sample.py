@@ -37,5 +37,13 @@ with DAG(
         sql='/sql/order_revenue_model.sql',
     )
 
-    extract_orders_task>>load_orders_task>>revenue_model_task
+    # Chap8 데이터 파이프라인 검증 task 추가
+    check_order_rowcount_task = BashOperator(
+        task_id = 'check_order_rowcount',
+        bash_command = 'set -e; python validator.py' + 
+        'order_count.sql order_full_count.sql equals',
+    )
+
+    extract_orders_task>>load_orders_task>>check_order_rowcount_task>>revenue_model_task
     extract_customers_task>>load_customers_task>>revenue_model_task
+
